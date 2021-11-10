@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cloud.webtype.com/css/d4767ecb-457a-4677-8761-72f890add836.css" />
+    <link rel="stylesheet" href="https://cdn.knightlab.com/libs/orangeline/0.1.1/css/orangeline.min.css" />
+    <!-- /CSS -->
+
+    <!-- FAVICONS -->
+    
+    <!-- /FAVICONS -->
+
+    <title>Find the Killer</title>
+  
+    <link rel="stylesheet" href='https://codemirror.net/lib/codemirror.css'>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/neat.css" />
+
+    <script src="https://unpkg.com/@webcomponents/custom-elements@1.2.0/custom-elements.min.js"></script>
+    <script src="scripts/codemirror.js"></script>
+    <script src="scripts/codemirrorsql.js"></script>
+    <script src="scripts/autorefresh.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        window.onload = () => loadData('sql-murder-mystery.db');
+    </script>
+    <title>The SQL Murder Mystery</title>
+</head>
+
+<body>
+    <nav id="navbar-product-top" class="navbar navbar-dark">
+        <ul>
+            <li class="logo">
+               <h1 class="mainlogo">Find The Killer</h1>
+            </li>
+        </ul>
+     
+    </nav>
+
+    <header class="header-product">
+        <h1 class="product-logo product-logo-large">
+            Find the killer
+        </h1>
+    </header>
+
+    <div class="container">
+
+        <div id="intro" class="grid">
+            <div class="grid-item">
+                <img src="174092-clue-illustration.png" class="heroimg" alt="A decorative illustration of a detective looking at an evidence board.">
+                <p>
+                    There's been a Murder in SQL City! The SQL Murder Mystery is designed to be both a self-directed lesson to learn SQL concepts and commands and a fun game for experienced SQL users to solve an intriguing crime.
+                </p>
+
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h2>Walkthrough for SQL Beginners</h2>
+               
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <p>
+                    A crime has taken place and the detective needs your help. The detective gave you the crime scene report, but you somehow lost it. You vaguely remember that the crime was a <strong>​murder​</strong> that occurred sometime on ​<strong>Jan.15, 2018​</strong>                    and that it took place in ​<strong>SQL City​</strong>. Start by retrieving the corresponding crime scene report from the police department’s database.
+                </p>
+                <p>
+                    All the clues to this mystery are buried in a huge database, and you need to use SQL to navigate through this vast network of information. Your first step to solving the mystery is to retrieve the corresponding crime scene report from the police department’s
+                    database. Below we'll explain from a high level the commands you need to know; whenever you are ready, you can start adapting the examples to create your own SQL commands in search of clues -- you can run any SQL in any of the code
+                    boxes, no matter what was in the box when you started.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="grid">
+            <div class="grid-item">
+                <h2>The ER diagram</h2>
+                <img src="schema.png" width='1002' height='491'>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h2>
+                    Peek into the table
+                </h2>
+             
+                <sql-exercise data-question="Just how many people are in this database?"" data-default-text="SELECT count(*)
+FROM person;"></sql-exercise>
+
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+
+                <sql-exercise data-question="This query only returns reports about a specific type of crime in a specific city." data-comment=" Notice that when querying for text values, you must match the data as it is in the database. Try to find the crimes for SQL city"
+                    data-default-text="SELECT * FROM crime_scene_report 
+WHERE type = 'theft' 
+AND city = 'Chicago';" data-solution="SELECT * FROM crime_scene_report 
+WHERE type = 'murder' 
+AND city = 'SQL City';"></sql-exercise>
+
+                <p>If you haven't found the right crime scene report yet, click "show solution" above, and replace the contents of the box with just the revealed command. (Leave out the initial <code>/*</code>) If you figured out the query that shows the
+                    single crime scene report instead of a few for the same city and type, then congratulations and disregard the word "incorrect". You'll know if you got it!
+                </p>
+
+               
+
+            </div>
+        </div>
+
+        <div id="credits" class="grid">
+            <div class="grid-item">
+                <h2>Digging deeper</h2>
+
+               
+                <sql-exercise data-question="Run this query, to find the maximum age for drivers_license table." data-comment="" data-default-text="SELECT max(age) FROM drivers_license;"></sql-exercise>
+
+                <p>There's another way to find minimum and maximum values, while also seeing more of the data. You can control the sort order of results you get. It's really quite intuitive: just use <code>ORDER BY</code> followed by a column name. It can
+                    be challenging when there's a lot of data! (When people get serious about working with SQL, they use better tools than this web-based system!) By default, ORDER BY goes in "ascending" (smallest to largest, or A to Z) order, but you
+                    can be specific with <code>ASC</code> for ascending, or you can reverse it with <code>DESC</code>.
+                </p>
+                <sql-exercise data-question="Run this query to see how to control sort order." data-comment="After you've run it, change ASC to DESC, or take that part out completely to see how the results differ. Try sorting on other columns." data-default-text="SELECT * FROM drivers_license ORDER BY age ASC LIMIT 10"></sql-exercise>
+
+                <p>By now, you know enough SQL to identify the two witnesses. Give it a try!</p>
+                <sql-exercise data-question="Write a query that identifies the first witness." data-comment="There's more than one way to do it, so you may learn the answer even if the results say 'Incorrect'" data-default-text="
+
+
+" data-solution="SELECT * FROM person 
+WHERE address_street_name = 'Northwestern Dr' 
+ORDER BY address_number DESC LIMIT 1;"></sql-exercise>
+
+                <sql-exercise data-question="Write a query that identifies the second witness." data-comment="There's more than one way to do it, so you may learn the answer even if the results say 'Incorrect'" data-default-text="
+
+
+" data-solution="SELECT * FROM person 
+WHERE name like '%Annabel%'
+AND address_street_name = 'Franklin Ave';"></sql-exercise>
+
+            </div>
+        </div>
+
+        <div id="joins" class="grid">
+            <div class="grid-item">
+                <h2>Make connections</h2>
+
+               
+                <sql-exercise data-question="Write a query that shows the interview transcripts for our two subjects." data-comment="There's more than one way to do it, so you may learn the answer even if the results say 'Incorrect'. The official solution does it in one query, but you don't have to. Technically you don't even need to use a JOIN to get the transcripts, but give it a try."
+                    data-default-text="
+
+
+" data-solution="SELECT person.name, interview.transcript
+FROM person JOIN interview
+ON person.id = interview.person_id
+WHERE person.id = 14887 OR person.id = 16371;"></sql-exercise>
+            </div>
+        </div>
+
+
+
+        <div id="go-get-em" class="grid">
+            <div class="grid-item">
+                <h3>Go Get 'em!</h3>
+                <sql-exercise data-question="Find the murderer!" data-comment="It will take more than one query to find the killer, but you can just keep editing this box, keeping notes on your results along the way. When you think you know the answer, go to the next section."
+                    data-default-text="
+
+
+"></sql-exercise>
+
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h3>Check your solution</h3>
+                <sql-exercise data-question="Did you find the killer?" data-comment="" data-default-text="INSERT INTO solution VALUES (1, 'Insert the name of the person you found here');
+
+SELECT value FROM solution;"></sql-exercise>
+
+            </div>
+        </div>
+
+
+    <script src="https://cdn.knightlab.com/libs/orangeline/0.1.1/js/orangeline.js"></script>
+    <script type="text/javascript">
+        document.querySelector('#show-schema').addEventListener('click', function() {
+            document.querySelector('#experienced-schema').classList.add('show');
+        })
+    </script>
+
+</body>
+
+</html>
